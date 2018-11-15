@@ -24,7 +24,7 @@
       return str;
     })
     let text = textArray.join("\r");
-    text += "\rОбщий коэффициент " + koeff(betsJson.reduce((acc, cur) => acc *= cur.V, 1))
+    text += "\rОбщий коэффициент " + Math.floor(100 * betsJson.reduce((acc, cur) => acc *= cur.V, 1)) / 100
     rendered.value = text
   }
 
