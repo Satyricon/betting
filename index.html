@@ -52,9 +52,9 @@
         if (bet.R.toLowerCase() == "ничья") {
           isxod = "Х"
         } else if (bet.R.toLowerCase() == "больше") {
-          isxod = "ТБ"
+          isxod = `ТБ (${bet.koef})`
         } else if (bet.R.toLowerCase() == "меньше") {
-          isxod = "ТМ"
+          isxod = `ТМ (${bet.koef})`
         }
       }
       return isxod
