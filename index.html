@@ -45,16 +45,68 @@
         if(bet.Free.toLowerCase().includes("фора")) {
           isxod = bet.Free.replace("фора", "Ф" + (index+1))
         }
-        else
+        else if(bet.Free.includes("1 тайм исход 1X2")) {
+          isxod = "в 1Т П" + (index+1)
+        }
+        else if(bet.Free.includes("2 тайм исход 1X2")) {
+          isxod = "в 2Т П" + (index+1)
+        }
+        else {
           isxod = "П" + (index+1)
+        }
       }
       else {
         if (bet.R.toLowerCase() == "ничья") {
-          isxod = "Х"
+          if(bet.Free.includes("1 тайм исход 1X2")) {
+            isxod = "в 1Т Х"
+          }
+          else if(bet.Free.includes("2 тайм исход 1X2")) {
+            isxod = "в 2Т Х"
+          }
+          else {
+            isxod = "Х"
+          }
         } else if (bet.R.toLowerCase() == "больше") {
-          isxod = `ТБ (${bet.koef})`
+          if(bet.Free.includes("Тотал угловых (осн. время)")) {
+            isxod = `угл ТБ (${bet.koef})`
+          } 
+          else if(bet.Free.includes("Тотал (осн. время)")) {
+            if (bet.Free.includes(bet.members[0])) {
+              isxod = `К1 ТБ (${bet.koef})`
+            } 
+            else if (bet.Free.includes(bet.members[1])) {
+              isxod = `К2 ТБ (${bet.koef})`
+            } 
+            else {
+              isxod = `ТБ (${bet.koef}) в осн вр`
+            }
+          }
+          else {
+            isxod = `ТБ (${bet.koef}) `
+          }
         } else if (bet.R.toLowerCase() == "меньше") {
-          isxod = `ТМ (${bet.koef})`
+          if(bet.Free.includes("Тотал угловых (осн. время)")) {
+            isxod = `угл ТМ (${bet.koef})`
+          }
+          else if(bet.Free.includes("Тотал (осн. время)")) {
+            if (bet.Free.includes(bet.members[0])) {
+              isxod = `К1 ТМ (${bet.koef})`
+            } 
+            else if (bet.Free.includes(bet.members[1])) {
+              isxod = `К2 ТМ (${bet.koef})`
+            } 
+            else {
+              isxod = `ТМ (${bet.koef}) в осн вр`
+            }
+          }
+          else {
+            isxod = `ТМ (${bet.koef})`
+          }
+        } else if (bet.Free == "Обе забьют (осн. время)") {
+          if(bet.R.toLowerCase() == "да")
+            isxod = "обе забьют"
+          else
+            isxod = "обе не забьют"
         }
       }
       return isxod
