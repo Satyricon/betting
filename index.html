@@ -16,7 +16,7 @@
     let textArray = betsJson.map(bet => {
       var d = new Date(bet.date)
 
-      let str = d.getDate()+"."+d.getMonth() + "\r" +
+      let str = d.getDate()+"."+(d.getMonth()+1) + "\r" +
         bet.members.join(" - ") + "\r" +
         "(" + bet.sportName + ") " +
         isxod(bet) + " кф " + koeff(bet.V) + "\r"
