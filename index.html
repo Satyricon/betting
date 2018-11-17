@@ -66,8 +66,9 @@
           else {
             isxod = "Х"
           }
-        } else if (bet.R.toLowerCase() == "больше") {
-          if(bet.Free.includes("Тотал угловых (осн. время)")) {
+        } 
+        else if (bet.R.toLowerCase() == "больше") {
+          if (bet.Free.includes("Тотал угловых (осн. время)")) {
             isxod = `угл ТБ (${bet.koef})`
           } 
           else if(bet.Free.includes("Тотал (осн. время)")) {
@@ -81,10 +82,20 @@
               isxod = `ТБ (${bet.koef}) в осн вр`
             }
           }
+          else if (bet.Free.includes("Тотал (с ОТ и булл.)")) {
+            isxod = `ТБ (${bet.koef}) (с ОТ и булл.)`
+          }
+          else if(bet.Free.includes("1 тайм тотал")) {
+            isxod = `1Т ТБ (${bet.koef})`
+          }
+          else if(bet.Free.includes("2 тайм тотал")) {
+            isxod = `2Т ТБ (${bet.koef})`
+          }
           else {
             isxod = `ТБ (${bet.koef}) `
           }
-        } else if (bet.R.toLowerCase() == "меньше") {
+        } 
+        else if (bet.R.toLowerCase() == "меньше") {
           if(bet.Free.includes("Тотал угловых (осн. время)")) {
             isxod = `угл ТМ (${bet.koef})`
           }
@@ -99,14 +110,41 @@
               isxod = `ТМ (${bet.koef}) в осн вр`
             }
           }
+          else if (bet.Free.includes("Тотал (с ОТ и булл.)")) {
+            isxod = `ТМ (${bet.koef}) (с ОТ и булл.)`
+          }
+          else if(bet.Free.includes("1 тайм тотал")) {
+            isxod = `1Т ТМ (${bet.koef})`
+          }
+          else if(bet.Free.includes("2 тайм тотал")) {
+            isxod = `2Т ТМ (${bet.koef})`
+          }
           else {
             isxod = `ТМ (${bet.koef})`
           }
-        } else if (bet.Free == "Обе забьют (осн. время)") {
+        } 
+        else if (bet.Free == "Обе забьют (осн. время)") {
           if(bet.R.toLowerCase() == "да")
             isxod = "обе забьют"
           else
             isxod = "обе не забьют"
+        }
+        else if (bet.Free == "Двойной шанс (осн. время)") {
+          isxod = bet.R
+        }
+        else if (bet.Free == "1 тайм двойной шанс") {
+          isxod = `1Т ${bet.R}`
+        }
+        else if (bet.Free == "2 тайм двойной шанс") {
+          isxod = `2Т ${bet.R}`
+        }
+        else if (bet.Free.includes("Исход и тотал (осн. время)")) {
+          const comb = bet.R.split("/")
+          isxod = `${["П1","П2"].includes(comb[0]) ? comb[0]: "Х"} и Т${comb[1][0]} (${bet.koef})`
+        }
+        else if (bet.Free.includes("тайм исход и тотал")) {
+          const comb = bet.R.split("/")
+          isxod = `${bet.Free[0]}Т ${["П1","П2"].includes(comb[0]) ? comb[0]: "Х"} и Т${comb[1][0]} (${bet.koef})`
         }
       }
       return isxod
